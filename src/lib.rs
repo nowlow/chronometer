@@ -3,9 +3,9 @@ use std::time::{Duration, Instant};
 pub struct Chronometer {
     _chrono: Option<Instant>,
     _old: Option<Duration>,
-    laps: Vec<Duration>,
-    started: bool,
-    paused: bool,
+    pub laps: Vec<Duration>,
+    pub started: bool,
+    pub paused: bool,
 }
 
 impl Chronometer {
@@ -39,7 +39,10 @@ impl Chronometer {
 
     pub fn lap(&mut self) {
         match self._chrono {
-            Some(chrono) => self.laps.push(chrono.elapsed()),
+            Some(chrono) => {
+                println!("LAP {}", chrono.elapsed().as_millis());
+                self.laps.push(chrono.elapsed())
+            },
             _ => (),
         }
     }
