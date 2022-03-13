@@ -79,9 +79,18 @@ impl std::fmt::Display for Chronometer {
     }
 }
 
+impl std::fmt::Debug for Chronometer {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> Result<(), std::fmt::Error> {
+        write!(f, "started: {}, paused: {}, laps: {}, current value: {:?}", self.started, self.paused, self.laps.len(), match self.duration() {
+            Some(duration) => duration,
+            None => std::time::Duration::new(0, 0),
+        });
+        Ok(())
+    }
+}
+
 
 #[cfg(test)]
-
 mod test {
     use super::Chronometer;
 
