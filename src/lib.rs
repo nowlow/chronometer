@@ -38,12 +38,8 @@ impl Chronometer {
     }
 
     pub fn lap(&mut self) {
-        match self._chrono {
-            Some(chrono) => {
-                println!("LAP {}", chrono.elapsed().as_millis());
-                self.laps.push(chrono.elapsed())
-            },
-            _ => (),
+        if let Some(chrono) = self._chrono {
+            self.laps.push(chrono.elapsed());
         }
     }
 
@@ -56,18 +52,20 @@ impl Chronometer {
     }
 
     pub fn duration(&self) -> Option<Duration> {
-        match self.started {
-            true => match self.paused {
-                true => self._old,
-                false => match self._chrono {
+        if self.started {
+            if self.paused {
+                self._old
+            } else {
+                match self._chrono {
                     Some(chrono) => match self._old {
                         Some(old) => Some(chrono.elapsed() + old),
                         None => Some(chrono.elapsed()),
                     },
                     None => None,
-                },
-            },
-            false => None,
+                }
+            }
+        } else {
+            None
         }
     }
 }
@@ -81,61 +79,68 @@ impl std::fmt::Display for Chronometer {
     }
 }
 
-#[test]
-fn create() {
-    let chrono = Chronometer::new();
 
-    assert_eq!(chrono.started, false);
-    assert_eq!(chrono.paused, false);
+#[cfg(test)]
 
-    assert_eq!(chrono._chrono, None);
-    assert_eq!(chrono.laps, vec![]);
+mod test {
+    use super::Chronometer;
 
-    assert_eq!(chrono.duration(), None);
-}
+    #[test]
+    fn create() {
+        let chrono = Chronometer::new();
 
-#[test]
-fn start() {
-    let mut chrono = Chronometer::new();
+        assert_eq!(chrono.started, false);
+        assert_eq!(chrono.paused, false);
 
-    chrono.start();
+        assert_eq!(chrono._chrono, None);
+        assert_eq!(chrono.laps, vec![]);
 
-    assert_eq!(chrono.started, true);
-    assert_eq!(chrono.paused, false);
-
-    assert_ne!(chrono._chrono, None);
-
-    std::thread::sleep(std::time::Duration::from_millis(100));
-
-    match chrono.duration() {
-        Some(duration) => assert_eq!(duration.as_millis() > 0, true),
-        None => assert_eq!(true, false),
+        assert_eq!(chrono.duration(), None);
     }
-}
 
-#[test]
-fn pause() {
-    let mut chrono = Chronometer::new();
+    #[test]
+    fn start() {
+        let mut chrono = Chronometer::new();
 
-    chrono.start();
+        chrono.start();
 
-    assert_eq!(chrono.started, true);
-    assert_eq!(chrono.paused, false);
+        assert_eq!(chrono.started, true);
+        assert_eq!(chrono.paused, false);
 
-    let time_before_pause = match chrono.duration() {
-        Some(duration) => duration.as_millis(),
-        None => 10000,
-    };
+        assert_ne!(chrono._chrono, None);
 
-    chrono.pause();
+        std::thread::sleep(std::time::Duration::from_millis(100));
 
-    assert_eq!(chrono.started, true);
-    assert_eq!(chrono.paused, true);
+        match chrono.duration() {
+            Some(duration) => assert_eq!(duration.as_millis() > 0, true),
+            None => assert_eq!(true, false),
+        }
+    }
 
-    let time_after_pause = match chrono.duration() {
-        Some(duration) => duration.as_millis(),
-        None => 10000,
-    };
+    #[test]
+    fn pause() {
+        let mut chrono = Chronometer::new();
 
-    assert_eq!(time_before_pause, time_after_pause);
+        chrono.start();
+
+        assert_eq!(chrono.started, true);
+        assert_eq!(chrono.paused, false);
+
+        let time_before_pause = match chrono.duration() {
+            Some(duration) => duration.as_millis(),
+            None => 10000,
+        };
+
+        chrono.pause();
+
+        assert_eq!(chrono.started, true);
+        assert_eq!(chrono.paused, true);
+
+        let time_after_pause = match chrono.duration() {
+            Some(duration) => duration.as_millis(),
+            None => 10000,
+        };
+
+        assert_eq!(time_before_pause, time_after_pause);
+    }
 }
