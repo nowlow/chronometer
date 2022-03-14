@@ -89,6 +89,6 @@ fn main() {
 I don't think anyone would ever want to use this crate but if you do and you find bug, before internally insulting me, please fill an issue or send me a message on [twitter](https://twitter.com/nowlow_).
 
 ## License
-[MIT](LICENSE.txt)
+[MIT](LICENSE)
 ___  
 Love and potatoes, nowlow 🙌
