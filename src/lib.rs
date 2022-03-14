@@ -84,8 +84,7 @@ impl std::fmt::Debug for Chronometer {
         write!(f, "started: {}, paused: {}, laps: {}, current value: {:?}", self.started, self.paused, self.laps.len(), match self.duration() {
             Some(duration) => duration,
             None => std::time::Duration::new(0, 0),
-        });
-        Ok(())
+        })
     }
 }
 
