@@ -1,3 +1,0 @@
-(function() {var implementors = {};
-implementors["chronometer"] = [{"text":"impl <a class=\"trait\" href=\"https://doc.rust-lang.org/1.59.0/core/marker/trait.Send.html\" title=\"trait core::marker::Send\">Send</a> for <a class=\"struct\" href=\"chronometer/struct.Chronometer.html\" title=\"struct chronometer::Chronometer\">Chronometer</a>","synthetic":true,"types":["chronometer::Chronometer"]}];
-if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

@@ -172,7 +172,7 @@ impl Chronometer {
     }
 }
 
-// Displays the current duration as milliseconds
+/// Displays the current duration as milliseconds
 impl std::fmt::Display for Chronometer {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> Result<(), std::fmt::Error> {
         match self.duration() {
@@ -182,7 +182,7 @@ impl std::fmt::Display for Chronometer {
     }
 }
 
-// Displays all the public chronometer informations
+/// Displays all the public chronometer informations
 impl std::fmt::Debug for Chronometer {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> Result<(), std::fmt::Error> {
         write!(f, "<Chronometer {{ started: {}, paused: {}, laps: {}, current value: {:?} }}>", self.started, self.paused, self.laps.len(), match self.duration() {

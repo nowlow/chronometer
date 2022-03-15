@@ -1,3 +1,0 @@
-(function() {var implementors = {};
-implementors["chronometer"] = [{"text":"impl Freeze for <a class=\"struct\" href=\"chronometer/struct.Chronometer.html\" title=\"struct chronometer::Chronometer\">Chronometer</a>","synthetic":true,"types":["chronometer::Chronometer"]}];
-if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()
