@@ -4,41 +4,16 @@ Stopwatch lib for rust. Start, pause, reset and lap like any stopwatch. Nothing 
 
 ## Getting Started
 
-This crate hasn't been uploaded on cargo yet, so clone this repo and make it work, you're probably better at rust than me. Like any cargo project, it has the default architecture.
+Add this line to your `Cargo.toml`
+```
+chronometer = "0.1.2"
+```
 
-## Features
+> I'm not that well organized to update this readme evrytime I change version, so just to be sure, check the latest release [here](https://crates.io/crates/chronometer)  
 
-### Methods
+## Docs
 
-#### `::new`
-Create a new chronometer.  
-
-#### `.start()`
-Starts the chonometer.
-
-#### `.pause()`
-Pause the chronometer.
-
-#### `.reset()`
-Reset everything about the chronometer.
-
-#### `.lap()`
-Add a new lap to the `laps`.
-
-#### `.duration() -> std::time::Duration`
-Gets you the time that the chronometer has computed.  
-Might find a better name for that one later.  
-
-### Fields
-
-#### `started: bool`
-Has the chronometer started yet?
-
-#### `paused: bool`
-Is the chronometer currently in pause state?
-
-#### `laps: Vec<Duration>`
-All the durations in which the chronometer has marked a lap.
+Full docs [here](https://docs.rs/chronometer/0.1.1/chronometer/)
 
 ## Example
 
